@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient
+const prisma = new PrismaClient();
 
 interface User {
     name:       string
@@ -10,12 +9,13 @@ interface User {
 
 export const userModel = async (data: User) => {
     try {
-        const user = await prisma.user.create({
-            data: {
-                name: data.name,
-                email: data.email,
-                password: data.password
-            } satisfies User
+
+        const user = await prisma.users.create({ 
+            data: { 
+                Name: data.name,
+                Email: data.email,
+                Password: data.password
+            } 
         });
 
         console.log("Novo usuário criado: ", user);

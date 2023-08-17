@@ -17,7 +17,7 @@ model Users {
   Email     String @default("") @unique
   Password  String @default("") @unique
 
-  RoomId    Int   
+  RoomId    Int?   
   
   Messages Messages[]
   @@map("Users")

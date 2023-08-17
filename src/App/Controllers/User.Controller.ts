@@ -7,6 +7,10 @@ class userController {
         const { ...data } = req.body; 
 
         await userModel(data)
+
+        return res.json({
+            message: "usuario: " + data.name + " criado"
+        })
     }
 }
 
