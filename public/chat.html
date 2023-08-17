@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>teste</h1>
+
+    <form class="form">
+        <input type="text" name="username">
+        <div class="messages"></div>
+        <input type="text" name="messages">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.7.0.js"
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous"></script>
+    <script>
+
+        const renderMessage = (message) => {
+            $('.messages').append('<div class="message"><strong>' + message + '</strong></div>')
+        }
+
+        const form = document.querySelector('.form')
+        const socket = io();
+
+        socket.on('ReceivedMessage', (message) => {
+            renderMessage(message)
+        })
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+        
+            const message = $('input[name=username]').val()
+            console.log(message)
+
+            renderMessage(message)
+
+            socket.emit("sendMessage", message)
+        
+        })
+
+
+
+    </script>
+
+
+</body>
+</html>
