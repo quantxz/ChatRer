@@ -1,22 +1,38 @@
-import express from "express";
-import { Response, Request } from "express"
-import path from "path"
+import * as path from "path"
 import { createServer } from "http"
 import { Server } from "socket.io"
 import routes from "./routes";
+import * as express from "express"
+import { Request, Response } from "express";
+import * as cors from "cors";
 
-const app = express();
+class App {
+    public server: express.Application;
 
+    constructor() {
+        this.server = express();
+        this.middleware();
+        this.routes();
+    }
 
-//configura o servidor para permitir entrada de dados via formulario
-app.use(express.urlencoded({ extended: true }));
+    private middleware() {
+        this.server.use(express.json())
+        this.server.use(cors())
+        this.server.use(express.urlencoded({ extended: true }));
+        this.server.use(express.json())
+        this.server.use(express.static(path.join(__dirname, '..', 'public')))
+        this.server.set('views', path.join(__dirname, '..' , 'public'));
+        this.server.set('view engine', 'ejs');
+        this.server.engine('ejs', require('ejs').renderFile);
+        this.server.use(routes)
+    }
 
-app.use(express.json())
-app.use(express.static(path.join(__dirname, '..', 'public')))
-app.set('views', path.join(__dirname, '..' , 'public'));
-app.engine('ejs', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.use(routes)
+    private routes() {
+        this.server.use(routes)
+    }
+}
+
+const app = new App().server;
 
 export const httpServer = createServer(app);
 
@@ -25,7 +41,7 @@ const io = new Server(httpServer, {
 });
 
 app.get('/', (req: Request, res: Response) => {
-  res.render('index.ejs')
+  return res.render('index.ejs')
 })
 
 export {

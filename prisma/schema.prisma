@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
+model Users {
   id        Int @id @default(autoincrement())
 
   name      String @default("") @unique
@@ -18,27 +18,27 @@ model users {
   password  String @default("") @unique //campo não faz diferença no chat
   roomsn    String?
 
-  Rooms     rooms?  @relation(fields: [roomsn], references: [name])
-  @@map("users")
+  Rooms     Rooms?  @relation(fields: [roomsn], references: [name])
+  @@map("Users")
 }
 
-model rooms {
+model Rooms {
   name  String @id @unique
 
-  Users users[]
-  messages messages[]
+  Users Users[]
+  Messages Messages[]
 
   @@map("rooms")
 }
 
-model messages {
+model Messages {
   id          Int @id @default(autoincrement())
   message     String    @default("")
   author      String
   roomName    String    
 
-  room        rooms     @relation(fields: [roomName], references: [name])
+  room        Rooms     @relation(fields: [roomName], references: [name])
   createdAt   DateTime  @default(now())
 
-  @@map("message")
+  @@map("Message")
 }
