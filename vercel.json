@@ -1,8 +1,7 @@
 {
-    "version": 2,
     "builds": [
       {
-        "src": "src/server.ts",
+        "src": "src/server.ts", 
         "use": "@vercel/node"
       }
     ],
@@ -16,7 +15,11 @@
           "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PUT, DELETE",
           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
           "Content-Security-Policy": "default-src 'self'; style-src 'self' 'unsafe-inline';"
-        
+        },
+        "build": {
+          "env": {
+            "PRISMA_FORCE_NAPI": "true"
+          }
         }
       }
     ]
