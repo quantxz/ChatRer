@@ -1,6 +1,6 @@
-import * as express from "express";
+import express from "express";
 import { Response, Request } from "express"
-import * as path from "path"
+import path from "path"
 import { createServer } from "http"
 import { Server } from "socket.io"
 import routes from "./routes";
