@@ -166,18 +166,3 @@ font-size: 28px;
 margin-bottom: 20px;
 text-align: center;
 }
-
-button {
-padding: 10px 20px;
-background-color: #4CAF50;
-color: #fff;
-font-size: 18px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-margin-top: 20px;
-}
-
-button:hover {
-background-color: #3e8e41;
-}

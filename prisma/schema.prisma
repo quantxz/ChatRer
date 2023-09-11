@@ -13,25 +13,32 @@ datasource db {
 model Users {
   id        Int @id @default(autoincrement())
 
-  Name      String @default("")
-  Email     String @default("") @unique
-  Password  String @default("") @unique
+  name      String @default("") @unique
+  email     String @default("") @unique //campo não faz diferença no chat
+  password  String @default("") @unique //campo não faz diferença no chat
+  roomsn    String?
 
-  RoomId    Int?   
-  
-  Messages Messages[]
+  Rooms     Rooms?  @relation(fields: [roomsn], references: [name])
   @@map("Users")
+}
+
+model Rooms {
+  name  String @id @unique
+
+  Users Users[]
+  Messages Messages[]
+
+  @@map("rooms")
 }
 
 model Messages {
   id          Int @id @default(autoincrement())
+  message     String    @default("")
+  author      String
+  roomName    String    
 
-  Message     String    @default("")
-  CreatedAt   DateTime  @default(now())
-
-  authorId    Int
-
-  author Users  @relation(fields: [authorId], references: [id])
+  room        Rooms     @relation(fields: [roomName], references: [name])
+  createdAt   DateTime  @default(now())
 
   @@map("Message")
 }

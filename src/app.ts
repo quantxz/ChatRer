@@ -7,11 +7,15 @@ import routes from "./routes";
 
 const app = express();
 
+
+//configura o servidor para permitir entrada de dados via formulario
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '..', 'public')))
 app.set('views', path.join(__dirname, '..' , 'public'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.engine('ejs', require('ejs').renderFile);
+app.set('view engine', 'ejs');
 app.use(routes)
 
 export const httpServer = createServer(app);
@@ -21,7 +25,7 @@ const io = new Server(httpServer, {
 });
 
 app.get('/', (req: Request, res: Response) => {
-  res.render('index.html')
+  res.render('index.ejs')
 })
 
 export {

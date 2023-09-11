@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+    <h1 class="name">ola <%= name %>!</h1>
+    <div class="Rooms">
+
+        <h1>Criar Salas</h1>
+
+          <form method="post" class="form" action="/rooms">
+              <label for="roomName">Digite o nome da sala</label>
+              <input type="text" id="roomName" name="roomName"><br>
+              <label for="userName"><%=name %></label>
+              <input type="text" id="userName" name="userName" value="<%=name%>">
+              <button type="submit">Entrar/Criar</button>
+          </form>
+            
+    </div>
+   
+</body>
+</html> 

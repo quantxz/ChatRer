@@ -1,0 +1,45 @@
+.messages {
+    width: 60vw;
+    height: 400px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+  
+input[name="messages"] {
+    width: 52vw;
+}
+
+.dados {
+    position: absolute;
+    left: 70%;
+    top: 10%;
+    display: block;
+}
+
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 9.5vw;
+}
+    
+button:hover {
+    background-color: #3e8e41;
+}
+    
+    
+#chat {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+    

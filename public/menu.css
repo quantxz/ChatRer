@@ -1,0 +1,8 @@
+* {
+    font-family: 'poppins', sans-serif;
+}
+
+:root {
+    --button-color: #4CAF50;
+    --tamanho-fonte: 16px;
+}

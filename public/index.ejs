@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="siginPage">
+
+  <div class="block">
+    <h1 class="blockText">não tem uma conta? <br> crie uma agora mesmo</h1>
+
+    <button class="blockBtn">criar conta</button>
+  </div>
+
+  <div class="login">
+    <h1>login</h1>
+    
+    <form method="POST" action="/login">
+
+      <label for="name">Nickname:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="password">Senha:</label>
+      <input type="text" id="password" name="password" required autocomplete="current-password">
+    
+      <input type="submit" value="login" class="loginInput">
+    </form>
+
+  </div>
+
+  <div class="cadastros">
+    <h1>Cadastro de Usuário</h1>
+
+    <form method="POST" action="/register">
+
+      <label for="name">Nickname:</label>
+      <input type="text" id="name" name="name" required placeholder="Não digite seu nome Real">
+      
+      <label for="email">E-mail:</label>
+      <input type="text" id="email" name="email" required>
+
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required>      
+
+      <input type="submit" value="Cadastrar" class="cadastrar">
+
+    </form>
+  </div>
+
+  </div>  
+
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.js"
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous"></script>
+
+  <script>
+      const block = document.querySelector('.block')
+      const btn = document.querySelector('.blockBtn')
+      const cadastrar = document.querySelector('.cadastrar')
+      const h1 = document.querySelector('.blockText')
+      let isBlockOpen = false;
+
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        if (!isBlockOpen) {
+          block.style.left = '0';
+          block.style.right = '100%';
+          document.querySelector('.blockText').innerHTML = 'ja tem uma conta? <br> faça login';
+          document.querySelector('.blockBtn').innerHTML = 'login';
+          isBlockOpen = true;
+        } else {
+          block.style.left = '';
+          block.style.right = '';
+          document.querySelector('.blockText').innerHTML = 'não tem uma conta? <br> crie uma agora mesmo';
+          document.querySelector('.blockBtn').innerHTML = 'criar conta';
+          isBlockOpen = false;
+        }
+        
+      });
+
+  </script>
+</body>
+</html>
