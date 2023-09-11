@@ -5,5 +5,5 @@ const routes: Router = Router();
 routes.post("/register", UserController.createUser)
 routes.post("/login", UserController.check)
 routes.post("/rooms", UserController.createRoom)
-  
+        
 export default routes;
