@@ -1,0 +1,1 @@
+document.getElementById("Adam").setAttribute("disabled", "true");
