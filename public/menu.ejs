@@ -13,17 +13,54 @@
     <h1 class="name">ola <%= name %>!</h1>
     <div class="Rooms">
 
-        <h1>Criar Salas</h1>
+        <h1>Crie ou Entre em uma sala</h1>
 
           <form method="post" class="form" action="/rooms">
               <label for="roomName">Digite o nome da sala</label>
-              <input type="text" id="roomName" name="roomName"><br>
-              <label for="userName"><%=name %></label>
-              <input type="text" id="userName" name="userName" value="<%=name%>">
+              <input type="text" id="roomName" name="roomName" required><br>
+              <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
               <button type="submit">Entrar/Criar</button>
           </form>
             
     </div>
-   
+
+    <div class="moreAcess">
+      <h1>salas mais acessadas</h1>
+
+      <div class="room1">
+        <form method="post" action="/rooms">
+          <input type="text" name="roomName" id="roomName" value="Adam" readonly>
+          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
+          <button type="submit">Entrar na Sala</button>
+        </form>
+      </div>
+
+      <div class="room2">
+        <form method="post" action="/rooms">
+          <input type="text" name="roomName" id="roomName" value="Java" readonly>
+          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
+          <button type="submit">Entrar na Sala</button>
+        </form>
+      </div>
+
+      <div class="room3">
+        <form method="post" action="/rooms">
+          <input type="text" name="roomName" id="roomName" value="Node" readonly>
+          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
+          <button type="submit">Entrar na Sala</button>
+        </form>
+      </div>
+
+      <div class="room4">
+        <form method="post" action="/rooms">
+          <input type="text" name="roomName" id="roomName" value="Pokemon" readonly>
+          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
+          <button type="submit">Entrar na Sala</button>
+        </form>
+      </div>
+      
+    </div>
+    
+   <script src="menu.js"></script>
 </body>
 </html> 
