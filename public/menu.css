@@ -7,7 +7,7 @@
     left: 50%;
     transform: translate(-60%);
 }
-
+ 
 :root {
     --button-color: #4CAF50;
     --tamanho-fonte: 16px;
