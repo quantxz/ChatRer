@@ -41,10 +41,13 @@ btn.addEventListener('click', (e) => {
     socket.emit("message", data, (response) => {
         console.log(response)
         });
-    });
+
+    messageInput = ''
+
+});
 
 
-    socket.on("message", (data) => {
-        console.log('Received Message:', data.message);
-        renderMessage(data.message.message, data.user);
+socket.on("message", (data) => {
+    console.log('Received Message:', data.message);
+    renderMessage(data.message.message, data.user);
 });
