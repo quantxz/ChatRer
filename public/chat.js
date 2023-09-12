@@ -11,7 +11,6 @@ const renderMessage = (message, user) => {
 socket.on("room_messages", (data) => {
     if (Array.isArray(data)) {
         data.forEach((message) => {
-            console.log(message)
           renderMessage(message.message, message.author);
         });
       }
@@ -30,7 +29,7 @@ form.addEventListener('submit', (e) => {
 
     const messageInput = $('input[name=messages]');
     const message = messageInput.val();
-
+    messageInput.val = ''
 
     const data = {
         room,
@@ -38,16 +37,13 @@ form.addEventListener('submit', (e) => {
         user
     };
 
-    socket.emit("message", data, (response) => {
-        console.log(response)
-    });
+    socket.emit("message", data);
 
-    messageInput.val() = ''
+    document.getElementById("messsageInput").value = ''
 
 });
 
 
 socket.on("message", (data) => {
-    console.log('Received Message:', data.message);
     renderMessage(data.message.message, data.user);
 });
