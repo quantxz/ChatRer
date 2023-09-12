@@ -17,14 +17,14 @@ socket.on("room_messages", (data) => {
       }
 })
 
-const btn = document.querySelector('.btn');
+const form = document.querySelector('.messageForm');
 
 socket.emit("select_room", {
     room, 
     user
 })
 
-btn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
     e.preventDefault();
 
 
@@ -40,9 +40,9 @@ btn.addEventListener('click', (e) => {
 
     socket.emit("message", data, (response) => {
         console.log(response)
-        });
+    });
 
-    messageInput = ''
+    messageInput.val() = ''
 
 });
 
