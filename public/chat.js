@@ -1,6 +1,22 @@
 const socket = io();
 const room = document.querySelector(".roomName").textContent.trim();
 const user = document.querySelector(".userName").textContent.trim();
+const messagesElement = document.querySelector(".messages");
+
+function check() {
+    const messagesElement = document.querySelector(".messages");
+
+    if (messagesElement.children.length === 0) {
+        const nullMessage = document.createElement('div');
+        nullMessage.className = 'NullMessage';
+        nullMessage.textContent = 'Ainda não há mensagens aqui.';
+        messagesElement.appendChild(nullMessage);
+    } else if (messagesElement.children.length !== 0) {
+        const firstChild = messagesElement.firstChild;
+        messagesElement.removeChild(firstChild);
+    }
+}
+check()
 
 
 const renderMessage = (message, user) => {
@@ -13,7 +29,8 @@ socket.on("room_messages", (data) => {
         data.forEach((message) => {
           renderMessage(message.message, message.author);
         });
-      }
+        check()
+    }
 })
 
 const form = document.querySelector('.messageForm');
@@ -41,6 +58,9 @@ form.addEventListener('submit', (e) => {
 
     document.getElementById("messsageInput").value = ''
 
+    //checando se o numero de mendagems mudou
+
+    check()
 });
 
 
