@@ -30,12 +30,8 @@ export class userController {
         const emailExists: boolean = await checkEmail(userDto.email)
         const passwordExists: boolean = await checkPassword(userDto.password)
         
-        if(nameExists || emailExists || passwordExists) {
-            res.render("loginFail.ejs", { message: "Some of the fields are already being used by another user" });
-        } else {
-            await UserCreation(userDto);
-            res.render("menu.ejs", { userAndRooms });
-        }
+        await UserCreation(userDto);
+        res.render("menu.ejs", { userAndRooms });
              
         
 
