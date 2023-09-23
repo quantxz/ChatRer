@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <h1 class="name">ola <%= name %>!</h1>
+    <h1 class="name">ola <%= userAndRooms[0].name%>!</h1>
     <div class="Rooms">
 
         <h1>Crie ou Entre em uma sala</h1>
@@ -18,48 +18,32 @@
           <form method="post" class="form" action="/rooms">
               <label for="roomName">Digite o nome da sala</label>
               <input type="text" id="roomName" name="roomName" required><br>
-              <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
-              <button type="submit">Entrar/Criar</button>
+              <input type="text" id="userName" name="userName" value="<%= userAndRooms[0].name %>" style="display: none;">
+              <button type="submit" class="buttonCreateAcount">Entrar/Criar</button>
           </form>
             
     </div>       
 
-    <div class="moreAcess">
-      <h1>salas mais acessadas</h1>
-
-      <div class="room1">
-        <form method="post" action="/rooms">
-          <input type="text" name="roomName" id="roomName" value="Adam" readonly>
-          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
-          <button type="submit">Entrar na Sala</button>
-        </form>
+    <% if (userAndRooms[1].length > 0) { %>
+      <div class="moreAcess">
+        <h1>Salas mais acessadas</h1>
+    
+        <% for (let i = 0; i < Math.min(4, userAndRooms[1].length); i++) { %>
+          <div class="room">
+            <form method="post" action="/rooms">
+              <input type="text" name="roomName" id="roomName" value="<%= userAndRooms[1][i].name %>" readonly>
+              <input type="text" id="userName" name="userName" value="<%= userAndRooms[0].name %>" style="display: none;" readonly>
+              <button type="submit">Entrar na Sala</button>
+              <br>
+              <label>visits: <%=userAndRooms[1][i].visits%></label>
+            </form>
+          </div>
+        <% } %>
+    
       </div>
+    <% } %>
+    
 
-      <div class="room2">
-        <form method="post" action="/rooms">
-          <input type="text" name="roomName" id="roomName" value="Java" readonly>
-          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
-          <button type="submit">Entrar na Sala</button>
-        </form>
-      </div>
-
-      <div class="room3">
-        <form method="post" action="/rooms">
-          <input type="text" name="roomName" id="roomName" value="Node" readonly>
-          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
-          <button type="submit">Entrar na Sala</button>
-        </form>
-      </div>
-
-      <div class="room4">
-        <form method="post" action="/rooms">
-          <input type="text" name="roomName" id="roomName" value="Pokemon" readonly>
-          <input type="text" id="userName" name="userName" value="<%=name%>" style="display: none;">
-          <button type="submit">Entrar na Sala</button>
-        </form>
-      </div>
-      
-    </div>
     
    <script src="menu.js"></script>
 </body>

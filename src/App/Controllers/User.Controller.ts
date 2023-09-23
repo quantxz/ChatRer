@@ -1,69 +1,49 @@
 import { Request, Response } from "express";
 import { createUser as UserCreation } from "../Models/Users";
-import { PrismaClient, users } from "@prisma/client";
-import { chatData, loginData } from "../../types/genericsInterfaces";
+import { chatData } from "../../types/genericsInterfaces";
 import { createRooms } from "../Models/Room";
-import { findUser } from "../Models/find";
+import { userDto } from "../../types/DTO/User.dto";
+import { roomsDto } from "../../types/DTO/rooms.dto";
+import { MostPopularRooms } from "../Models/mostVisitedsRooms";
+import { checkEmail, checkNickname, checkPassword } from "../Models/RegisterCheck";
 
-const prisma = new PrismaClient();
-
-class userController {
-
-    async check(req: Request, res: Response): Promise<Response | void> {
-        const { name, password } = req.body;
-
-        const data: loginData = { name: name, password: password};
-        //deixando o usuario passar se for guest
-        if(name == "Guest" && password == "Pass") {
-            res.render("menu.ejs", data)
-        } else {
-            //achando o usuario com base nos dados
-            const user = await prisma.users.findFirst({
-                where: {
-                    name: name,
-                    password: password
-                }
-            });
-
-            if (user) {
-                res.render("menu.ejs", data)
-            } else {
-                //retornando para mesma aba se o usuario não for encontrado
-                res.render("loginFail.ejs", { message: "this user not exists" })
-            };
-        }
-
-    }
-    
+export class userController {
+       
     async createUser(req: Request, res: Response): Promise<void> {
         
         const { name, email, password } = req.body;
         
-        const data = {
+        const userDto: userDto = {
             name: name,
             email: email,
             password: password
-        } as users
-
-        await UserCreation(data)
-
-        res.render("menu.ejs", data)
+        }
         
-    }      
-    
-    async createRoom(req: Request, res: Response): Promise<void> {
-        const { roomName: name, userName: user  } = req.body;
+        const popularRooms = await MostPopularRooms()
 
-        const data = {
-            room: name,
-            user: user
-        } as chatData
+        const userAndRooms = [
+            userDto,
+            popularRooms
+        ]
 
-        await createRooms(data)
+        const nameExists: boolean = await checkNickname(userDto.name)
+        const emailExists: boolean = await checkEmail(userDto.email)
+        const passwordExists: boolean = await checkPassword(userDto.password)
         
-        res.render("chat.ejs", data)
-            
+        if(nameExists || emailExists || passwordExists) {
+            res.render("loginFail.ejs", { message: "Some of the fields are already being used by another user" });
+        } else {
+            await UserCreation(userDto);
+            res.render("menu.ejs", { userAndRooms });
+        }
+             
+        
+
+        
+
+        
+
+        res.render("menu.ejs", {userAndRooms})
+        
     }      
 }
-  
-export default new userController

@@ -26,8 +26,20 @@ input[name="Adam"] {
     height: 66vh;
     text-align: center;
 }
+.buttonCreateAcount {
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 21px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 20.5vw;
+    height: 10vh;
+}
 
-.Rooms > .form > button {
+.Rooms > .form > input[type="submit"] {
     background-color: #4CAF50;
     color: #fff;
     font-size: 21px;
@@ -75,19 +87,13 @@ input[name="Adam"] {
 
 .moreAcess > 
 h1,
-.room1,
-.room2,
-.room3,
-.room4 {
+.room {
     position: relative;
     left: 5vw;
 }
 
 .moreAcess > 
-.room1 > form > input[name="roomName"],
-.room2 > form > input[name="roomName"],
-.room3 > form > input[name="roomName"],
-.room4 > form > input[name="roomName"] {
+.room > form > input[name="roomName"] {
     height: 5.5vh;
     color: #000;
     font-size: 18px;
@@ -98,10 +104,7 @@ h1,
 }
 
 .moreAcess > 
-.room1 > form > button,
-.room2 > form > button,
-.room3 > form > button,
-.room4 > form > button {
+.room > form > button {
     background-color: #4CAF50;
     color: #fff;
     font-size: 18px;

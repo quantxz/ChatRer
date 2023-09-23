@@ -1,8 +1,8 @@
-import { PrismaClient, Users } from "@prisma/client";
-import { User } from "../../types/userType";
+import { PrismaClient, users } from "@prisma/client";
+import { userDto } from "../../types/DTO/User.dto";
 const prisma = new PrismaClient();
 
-export const createUser = async (data: Users): Promise<Users> => {
+export const createUser = async (data: userDto): Promise<users> => {
         const user = await prisma.users.create({ 
             data: { 
                 name:       data.name,
@@ -16,8 +16,8 @@ export const createUser = async (data: Users): Promise<Users> => {
         return user;
 }
 
-export const userRoomUpdate = async (data: any) => {
-    await prisma.users.update({
+export const userRoomUpdate = async (data: any): Promise<users> => {
+    const userRoom = await prisma.users.update({
         data: {
             roomsn: data.roomName
         },
@@ -25,4 +25,6 @@ export const userRoomUpdate = async (data: any) => {
             name: data.userName
         }
     })
+
+    return userRoom
 }

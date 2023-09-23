@@ -1,6 +1,6 @@
 *{
   font-family: 'poppins', sans-serif;
-  }
+}
 
 .siginPage{
   position: absolute;
@@ -15,18 +15,17 @@
 }
 
 .cadastros {
-display: flex;
-position: absolute;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-width: 50%;
-height: 100%;
-right: 0;
-background-color: #f2f2f2;
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
-
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  right: 0;
+  background-color: #f2f2f2;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 h1 {
@@ -60,6 +59,16 @@ input[type="password"]
 }
 
 input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.blockBtn {
   padding: 10px 20px;
   background-color: #4CAF50;
   color: #fff;

@@ -1,14 +1,14 @@
-import { PrismaClient, Rooms, Users } from "@prisma/client";
+import { PrismaClient, rooms } from "@prisma/client";
 import { Response } from "express"
-import { chatData } from "../../types/genericsInterfaces";
+import { roomsDto } from "../../types/DTO/rooms.dto";
 
 const prisma = new PrismaClient();
 
-export const createRooms = async (data: chatData): Promise<Rooms | ((res: Response) => void)> => {
+export const createRooms = async (data: roomsDto): Promise<rooms | ((res: Response) => void)> => {
     
     const room = await prisma.rooms.findFirst({
         where: {
-            name: data.room
+            name: data.name
         }
     })
 
@@ -19,7 +19,7 @@ export const createRooms = async (data: chatData): Promise<Rooms | ((res: Respon
     } else {
         const Room = await prisma.rooms.create({
             data: {
-                name: data.room
+                name: data.name
             }
         })
         return Room

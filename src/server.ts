@@ -1,4 +1,4 @@
-import { Messages, Prisma, PrismaClient, Rooms } from "@prisma/client";
+import { messages, Prisma, PrismaClient, rooms } from "@prisma/client";
 import { userRoomUpdate } from "./App/Models/Users";
 import { findRoom, findUser } from "./App/Models/find";
 import { io, httpServidor  } from "./app";
@@ -15,6 +15,18 @@ io.on('connection', (socket: any) => {
     socket.join(data.room);
       const user = await findUser({name: data.user})
       const room = await findRoom({name: data.room})
+      
+      await prisma.rooms.update({
+        data: {
+          visits: {
+            increment: 1
+          }
+        },
+        where: {
+          name: data.room
+        }
+      })
+
 
       const userInRoom = users.find(user => user.user === data.user && user.room === data.room)
 
@@ -51,7 +63,7 @@ io.on('connection', (socket: any) => {
 });
 
 
-const getMessages = async (roomName: string): Promise<Messages[]> => {
+const getMessages = async (roomName: string): Promise<messages[]> => {
   const message = await prisma.messages.findMany({
     where: {
       roomName: roomName
